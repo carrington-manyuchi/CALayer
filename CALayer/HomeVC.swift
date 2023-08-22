@@ -29,10 +29,15 @@ class HomeVC: UIViewController {
     //creating a standalone layer
     lazy var newLayer: CALayer = {
         let layer = CALayer()
-        layer.backgroundColor = UIColor.blue.cgColor
+        //layer.backgroundColor = UIColor.white.cgColor
         layer.cornerRadius = CGFloat(10.0)
         layer.borderWidth = CGFloat(5.0)
         layer.borderColor = UIColor.orange.cgColor
+        layer.shadowOpacity = 0.7
+        layer.shadowOffset = CGSize(width: -3, height: 2)
+        layer.shadowRadius = CGFloat(15.0)
+        layer.contents = UIImage(named: "birds")?.cgImage
+        layer.contentsGravity = .center
         return layer
     }()
 
@@ -41,9 +46,18 @@ class HomeVC: UIViewController {
         configureUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        
+       //MARK: -  What is the difference between a frame and a bounds
+        newLayer.frame = homeView.bounds
+    }
+    
     func configureUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(homeView)
+        homeView.layer.addSublayer(newLayer)
         configureConstraints()
     }
     
