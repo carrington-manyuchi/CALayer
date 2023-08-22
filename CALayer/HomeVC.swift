@@ -9,6 +9,7 @@ import UIKit
 
 class HomeVC: UIViewController {
     
+    // how to change the properties of a default layer. This is a layer that comes by default on a view
     let homeView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -18,8 +19,21 @@ class HomeVC: UIViewController {
         view.layer.borderWidth = CGFloat(5.0)
         view.layer.shadowOpacity = 0.7
         view.layer.shadowRadius  = 5
+        view.layer.masksToBounds = true
+        view.layer.contents = UIImage(named: "birds")?.cgImage
+        view.layer.contentsGravity   = CALayerContentsGravity.center
         view.layer.shadowOffset = CGSize(width: -5, height: 3)
         return view
+    }()
+    
+    //creating a standalone layer
+    lazy var newLayer: CALayer = {
+        let layer = CALayer()
+        layer.backgroundColor = UIColor.blue.cgColor
+        layer.cornerRadius = CGFloat(10.0)
+        layer.borderWidth = CGFloat(5.0)
+        layer.borderColor = UIColor.orange.cgColor
+        return layer
     }()
 
     override func viewDidLoad() {
